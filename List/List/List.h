@@ -18,6 +18,8 @@ public:
 	ListNode<T>* find(T const& e, int n, ListNode<T>* p) const;
 	ListNode<T>* insertAsFirst(T const& e);
 	ListNode<T>* insertAsLast(T const& e);
+	ListNode<T>* insert(ListNode<T>* p, T const& e);
+	ListNode<T>* insert(T const& e, ListNode<T>* p);
 };
 
 template<class T>
@@ -62,4 +64,16 @@ template<class T>
 ListNode<T>* List<T>::insertAsLast(T const& e) {
 	_size++;
 	return trailer->insertAsPred(e);
+}
+
+template<class T>
+ListNode<T>* List<T>::insert(ListNode<T>* p, T const& e) {
+	_size++;
+	return p->insertAsSucc(e);
+}
+
+template<class T>
+ListNode<T>* List<T>::insert(T const& e, ListNode<T>* p) {
+	_size++;
+	return p->insertAsPred(e);
 }
