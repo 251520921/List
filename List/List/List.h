@@ -15,7 +15,7 @@ public:
 	T& operator[](Rank r) const;
 
 	ListNode<T>* frist() const;
-
+	ListNode<T>* find(T const& e, int n, ListNode<T>* p) const;
 };
 
 template<class T>
@@ -41,4 +41,11 @@ T& List<T>::operator[](Rank r) const {
 template<class T>
 ListNode<T>* List<T>::frist() const {
 	return header->succ;
+}
+
+template<class T>
+ListNode<T>* List<T>::find(T const& e, int n, ListNode<T>* p) const {
+	while (0 < r--)
+		if (e == (p = p->pred)->data) return p;
+	return NULL; 
 }
