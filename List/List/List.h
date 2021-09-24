@@ -16,6 +16,7 @@ public:
 
 	ListNode<T>* frist() const;
 	ListNode<T>* find(T const& e, int n, ListNode<T>* p) const;
+	ListNode<T>* insertAsFirst(T const& e);
 };
 
 template<class T>
@@ -48,4 +49,10 @@ ListNode<T>* List<T>::find(T const& e, int n, ListNode<T>* p) const {
 	while (0 < r--)
 		if (e == (p = p->pred)->data) return p;
 	return NULL; 
+}
+
+template<class T>
+ListNode<T>* List<T>::insertAsFirst(T const& e) {
+	_size++;
+	return header->insertAsSucc();
 }
