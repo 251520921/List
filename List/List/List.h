@@ -27,6 +27,8 @@ public:
 	ListNode<T>* insert(ListNode<T>* p, T const& e);
 	ListNode<T>* insert(T const& e, ListNode<T>* p);
 	T remove(ListNode<T>* p);
+	void traverse(void (*visit)(T&));
+	template<class VST> void traverse(VST& visit);
 };
 
 template<class T>
@@ -132,4 +134,16 @@ T List<T>::remove(ListNode<T>* p) {
 	delete p;
 	_size--;
 	return e;
+}
+
+template<class T>
+void List<T>::traverse(void (*visit)(T&)) {
+	for (ListNode<T>* p = header->succ; p != trailer; p = p->succ)
+		visit(p->data);
+}
+
+template<class T> template<class VST>
+void List<T>::traverse(VST& visit) {
+	for (ListNode<T>* p = header->succ; p != trailer; p = p->succ)
+		visit(p->data);
 }
