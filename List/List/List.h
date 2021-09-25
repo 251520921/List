@@ -93,7 +93,7 @@ List<T>::~List() {
 
 template<class T>
 T& List<T>::operator[](Rank r) const {
-	ListNode<T>* p = first();
+	ListNode<T>* p = frist();
 	while (0 < r--)
 		p = p->succ;
 	return p->data;
@@ -106,7 +106,7 @@ ListNode<T>* List<T>::frist() const {
 
 template<class T>
 ListNode<T>* List<T>::find(T const& e, int n, ListNode<T>* p) const {
-	while (0 < r--)
+	while (0 < n--)
 		if (e == (p = p->pred)->data) return p;
 	return NULL; 
 }
