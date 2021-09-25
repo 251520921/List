@@ -12,6 +12,7 @@ private:
 	void copyNodes(ListNode<T>* p, int n);
 	void init();
 public:
+	List() { init(); }
 	List(ListNode<T>* p, int n);
 	List(List<T> const& L);
 	List(List<T> const& L, Rank r, int n);
