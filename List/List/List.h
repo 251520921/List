@@ -23,6 +23,7 @@ public:
 	ListNode<T>* insertAsLast(T const& e);
 	ListNode<T>* insert(ListNode<T>* p, T const& e);
 	ListNode<T>* insert(T const& e, ListNode<T>* p);
+	T remove(ListNode<T>* p);
 };
 
 template<class T>
@@ -103,4 +104,14 @@ template<class T>
 ListNode<T>* List<T>::insert(T const& e, ListNode<T>* p) {
 	_size++;
 	return p->insertAsPred(e);
+}
+
+template<class T>
+T List<T>::remove(ListNode<T>* p) {
+	T e = p->data;
+	p->succ->pred = p->pred;
+	p->pred->succ = p->succ;
+	delete p;
+	_size--;
+	return e;
 }
