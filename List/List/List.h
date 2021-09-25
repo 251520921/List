@@ -33,6 +33,7 @@ public:
 
 	//≈≈–Ú
 	void insertSort(ListNode<T>* p, int n);
+	void insertSort();
 
 	//”––Ú¡–±Ì
 	int uniquify();
@@ -160,10 +161,16 @@ void List<T>::traverse(VST& visit) {
 template<class T>
 void List<T>::insertSort(ListNode<T>* p, int n) {
 	for (int r = 0; r < n; r++) {
-		insert(search(p->data, p, r), p->data);
+		ListNode<T>* q = search(p->data, p, r);
+		insert(p->data,p);
 		p = p->succ;
 		remove(p->pred);
 	}
+}
+
+template<class T>
+void List<T>::insertSort() {
+	insertSort(header->succ, _size);
 }
 
 template<class T>
@@ -187,7 +194,10 @@ ListNode<T>* List<T>::search(T const& e, int n, ListNode<T>* p) const {
 
 template<class T>
 ListNode<T>* List<T>::search(T const& e, ListNode<T>* p, int n) const {
-	while (0 <= n--)
-		if (((p = p->succ)->data) >= e) break;
+	while (0 <= n--) {
+		p = p->succ;
+		if (p->data >= e) 
+			break;
+	}
 	return p;
 }
