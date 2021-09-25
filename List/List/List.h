@@ -30,7 +30,10 @@ public:
 	void traverse(void (*visit)(T&));
 	template<class VST> void traverse(VST& visit);
 
+	//”––Ú¡–±Ì
 	int uniquify();
+	ListNode<T>* search(T const& e, int n, ListNode<T>* p) const;
+	ListNode<T>* search(T const& e, ListNode<T>* p, int n) const;
 };
 
 template<class T>
@@ -160,4 +163,18 @@ int List<T>::uniquify() {
 		if (p->data != q->data) p = q;
 		else remove(q);
 	return oldSize - _size;
+}
+
+template<class T>
+ListNode<T>* List<T>::search(T const& e, int n, ListNode<T>* p) const {
+	while (0 <= n--)
+		if (((p = p->pred)->data) <= e) break;
+	return p;
+}
+
+template<class T>
+ListNode<T>* List<T>::search(T const& e, ListNode<T>* p, int n) const {
+	while (0 <= n--)
+		if (((p = p->succ)->data) >= e) break;
+	return p;
 }
