@@ -159,7 +159,7 @@ void List<T>::traverse(VST& visit) {
 
 template<class T>
 void List<T>::insertSort(ListNode<T>* p, int n) {
-	for (int r = 0; r < n r++) {
+	for (int r = 0; r < n; r++) {
 		insert(search(p->data, p, r), p->data);
 		p = p->succ;
 		remove(p->pred);
