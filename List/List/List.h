@@ -11,10 +11,13 @@ private:
 private:
 	void copyNodes(ListNode<T>* p, int n);
 	void init();
+	int clear();
 public:
 	List(ListNode<T>* p, int n);
 	List(List<T> const& L);
 	List(List<T> const& L, Rank r, int n);
+	~List();
+
 	T& operator[](Rank r) const;
 
 	ListNode<T>* frist() const;
@@ -48,6 +51,14 @@ void List<T>::init() {
 }
 
 template<class T>
+int List<T>::clear() {
+	int oldSize = _size;
+	while (0 < _size)
+		remove(header->succ);
+	return oldSize;
+}
+
+template<class T>
 List<T>::List(ListNode<T>* p, int n) {
 	copyNodes(p, n);
 }
@@ -60,6 +71,13 @@ List<T>::List(List<T> const& L) {
 template<class T>
 List<T>::List(List<T> const& L, Rank r, int n) {
 	copyNodes(L[r], n);
+}
+
+template<class T>
+List<T>::~List() {
+	clear();
+	delete header;
+	delete trailer;
 }
 
 template<class T>
