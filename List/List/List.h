@@ -8,10 +8,11 @@ class List {
 private:
 	int _size;
 	ListNode<T>* header; ListNode<T>* trailer;
-
-public:
+private:
+	void copyNodes(ListNode<T>* p, int n);
 	void init();
-
+public:
+	
 	T& operator[](Rank r) const;
 
 	ListNode<T>* frist() const;
@@ -21,6 +22,15 @@ public:
 	ListNode<T>* insert(ListNode<T>* p, T const& e);
 	ListNode<T>* insert(T const& e, ListNode<T>* p);
 };
+
+template<class T>
+void List<T>::copyNodes(ListNode<T>* p, int n) {
+	init();
+	while (n--) {
+		insertAsLast(p->data);
+		p = p->succ;
+	}
+}
 
 template<class T>
 void List<T>::init() {
