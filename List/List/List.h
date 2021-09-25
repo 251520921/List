@@ -30,6 +30,14 @@ public:
 	T remove(ListNode<T>* p);
 	void traverse(void (*visit)(T&));
 	template<class VST> void traverse(VST& visit);
+
+	//≈≈–Ú
+	void insertSort(ListNode<T>* p, int n);
+
+	//”––Ú¡–±Ì
+	int uniquify();
+	ListNode<T>* search(T const& e, int n, ListNode<T>* p) const;
+	ListNode<T>* search(T const& e, ListNode<T>* p, int n) const;
 };
 
 template<class T>
@@ -147,4 +155,39 @@ template<class T> template<class VST>
 void List<T>::traverse(VST& visit) {
 	for (ListNode<T>* p = header->succ; p != trailer; p = p->succ)
 		visit(p->data);
+}
+
+template<class T>
+void List<T>::insertSort(ListNode<T>* p, int n) {
+	for (int r = 0; r < n r++) {
+		insert(search(p->data, p, r), p->data);
+		p = p->succ;
+		remove(p->pred);
+	}
+}
+
+template<class T>
+int List<T>::uniquify() {
+	if (_size < 2) return 0;
+	int oldSize = _size;
+	ListNode<T>* p = frist;
+	ListNode<T>* q;
+	while (trailer != (q = p->succ))
+		if (p->data != q->data) p = q;
+		else remove(q);
+	return oldSize - _size;
+}
+
+template<class T>
+ListNode<T>* List<T>::search(T const& e, int n, ListNode<T>* p) const {
+	while (0 <= n--)
+		if (((p = p->pred)->data) <= e) break;
+	return p;
+}
+
+template<class T>
+ListNode<T>* List<T>::search(T const& e, ListNode<T>* p, int n) const {
+	while (0 <= n--)
+		if (((p = p->succ)->data) >= e) break;
+	return p;
 }
