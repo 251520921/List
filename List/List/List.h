@@ -29,6 +29,8 @@ public:
 	T remove(ListNode<T>* p);
 	void traverse(void (*visit)(T&));
 	template<class VST> void traverse(VST& visit);
+
+	int uniquify();
 };
 
 template<class T>
@@ -146,4 +148,16 @@ template<class T> template<class VST>
 void List<T>::traverse(VST& visit) {
 	for (ListNode<T>* p = header->succ; p != trailer; p = p->succ)
 		visit(p->data);
+}
+
+template<class T>
+int List<T>::uniquify() {
+	if (_size < 2) return 0;
+	int oldSize = _size;
+	ListNode<T>* p = frist;
+	ListNode<T>* q;
+	while (trailer != (q = p->succ))
+		if (p->data != q->data) p = q;
+		else remove(q);
+	return oldSize - _size;
 }
