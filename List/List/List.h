@@ -30,6 +30,9 @@ public:
 	void traverse(void (*visit)(T&));
 	template<class VST> void traverse(VST& visit);
 
+	//≈≈–Ú
+	void insertSort(ListNode<T>* p, int n);
+
 	//”––Ú¡–±Ì
 	int uniquify();
 	ListNode<T>* search(T const& e, int n, ListNode<T>* p) const;
@@ -151,6 +154,15 @@ template<class T> template<class VST>
 void List<T>::traverse(VST& visit) {
 	for (ListNode<T>* p = header->succ; p != trailer; p = p->succ)
 		visit(p->data);
+}
+
+template<class T>
+void List<T>::insertSort(ListNode<T>* p, int n) {
+	for (int r = 0; r < n r++) {
+		insert(search(p->data, p, r), p->data);
+		p = p->succ;
+		remove(p->pred);
+	}
 }
 
 template<class T>
