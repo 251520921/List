@@ -13,3 +13,17 @@ struct ListNode
 	ListNode<T>* insertAsPred(T const& e);
 	ListNode<T>* insertAsSucc(T const& e);
 };
+
+template<class T>
+ListNode<T>* ListNode<T>::insertAsPred(T const& e) {
+	ListNode<T>* x = new ListNode<T>(e, pred, this);
+	pred->succ = x; pred = x;
+	return x;
+}
+
+template<class T>
+ListNode<T>* ListNode<T>::insertAsSucc(T const& e) {
+	ListNode<T>* x = new ListNode<T>(e, this, succ);
+	succ->pred = x; succ = x;
+	return x;
+}
