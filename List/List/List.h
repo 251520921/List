@@ -12,6 +12,14 @@ private:
 	void copyNodes(ListNode<T>* p, int n);
 	void init();
 	int clear();
+
+	bool lt(T* a, T* b) { return lt(*a, *b); } //less than
+	bool lt(T& a, T& b) { return a < b; } //less than
+	bool eq(T* a, T* b) { return eq(*a, *b); } //equal
+	bool eq(T& a, T& b) { return a == b; } //equal
+
+	ListNode<T>* selectMax(ListNode<T>* p, int n);
+	ListNode<T>* selectMax() { return selectMax(header->succ, _size); }
 public:
 	List() { init(); }
 	List(ListNode<T>* p, int n);
@@ -32,13 +40,15 @@ public:
 	template<class VST> void traverse(VST& visit);
 
 	//排序
-	void insertSort(ListNode<T>* p, int n);
-	void insertSort();
+	void selectionSort(ListNode<T>* p, int n);	//选择排序
+	void selectionSort();	//选择排序
+	void insertSort(ListNode<T>* p, int n);	//插入排序
+	void insertSort();	//插入排序
 
 	//有序列表
-	int uniquify();
-	ListNode<T>* search(T const& e, int n, ListNode<T>* p) const;
-	ListNode<T>* search(T const& e, ListNode<T>* p, int n) const;
+	int uniquify();	//去重
+	ListNode<T>* search(T const& e, int n, ListNode<T>* p) const;	//查找
+	ListNode<T>* search(T const& e, ListNode<T>* p, int n) const;	//查找
 };
 
 template<class T>
@@ -68,6 +78,16 @@ int List<T>::clear() {
 	while (0 < _size)
 		remove(header->succ);
 	return oldSize;
+}
+
+template<class T>
+ListNode<T>* List<T>::selectMax(ListNode<T>* p, int n) {
+	ListNode<T>* max = p;
+	for (ListNode<T>* cur = p; n > 1; n--)
+		if (!lt((cur = cur->succ)->data, max->data)) //若当前元素不小于max，则
+			max = cur; //更新最大元素位置记录
+	return max; //返回最大节点位置
+
 }
 
 template<class T>
@@ -156,6 +176,25 @@ template<class T> template<class VST>
 void List<T>::traverse(VST& visit) {
 	for (ListNode<T>* p = header->succ; p != trailer; p = p->succ)
 		visit(p->data);
+}
+
+template<class T>
+void List<T>::selectionSort(ListNode<T>* p, int n) {
+	ListNode<T>* head = p->pred;
+	ListNode<T>* tail = p;
+	for (int i = 0; i < n; i++)
+		tail = tail->succ;
+	while (n > 1) {
+		ListNode<T>* max = selectMax(head->succ, n);
+		insert(remove(max), tail);
+		tail = tail->pred;
+		n--;
+	}
+}
+
+template<class T>
+void List<T>::selectionSort() {
+	selectionSort(header->succ, _size);
 }
 
 template<class T>
