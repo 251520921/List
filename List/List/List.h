@@ -196,12 +196,10 @@ template<class T>
 void List<T>::selectionSort() {
 	selectionSort(header->succ, _size);
 }
-
 template<class T>
 void List<T>::insertSort(ListNode<T>* p, int n) {
-	for (int r = 0; r < n; r++) {
-		ListNode<T>* q = search(p->data, p, r);
-		insert(p->data,p);
+	for (Rank r = 0; r < n; r++) {
+		insert(search(p->data, r, p), p->data);
 		p = p->succ;
 		remove(p->pred);
 	}
@@ -209,7 +207,7 @@ void List<T>::insertSort(ListNode<T>* p, int n) {
 
 template<class T>
 void List<T>::insertSort() {
-	insertSort(header->succ, _size);
+	insertSort(header->succ,_size);
 }
 
 template<class T>

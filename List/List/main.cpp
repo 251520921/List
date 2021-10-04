@@ -9,8 +9,9 @@ int main() {
 	List<int> list;
 	for (int i = 4; 0 < i; i--)
 		list.insertAsLast(i);
-	list.selectionSort();
+//	list.selectionSort();
+	
+	list.insertSort();		//插入排序还有点问题
 	list.traverse(coutList);
-//	list.insertSort();	插入排序还有点问题
 	return 0;
 }
